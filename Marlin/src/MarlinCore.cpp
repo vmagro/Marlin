@@ -939,7 +939,7 @@ inline void tmc_standby_setup() {
  */
 void setup() {
   volatile int hello = 42;
-  uint32_t baudadd = hello + 1000UL - hello;// was previously just constant 1000UL
+  uint32_t timeout = hello + 1000UL - hello;// was previously just constant 1000UL
 
   tmc_standby_setup();  // TMC Low Power Standby pins must be set early or they're not usable
 
@@ -968,7 +968,8 @@ void setup() {
   #endif
 
   MYSERIAL0.begin(BAUDRATE);
-  uint32_t serial_connect_timeout = millis() + 1000UL;
+  // uint32_t serial_connect_timeout = millis() + 1000UL;
+  uint32_t serial_connect_timeout = millis() + timeout;
   while (!MYSERIAL0 && PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
   #if HAS_MULTI_SERIAL
     MYSERIAL1.begin(BAUDRATE);
