@@ -938,6 +938,8 @@ inline void tmc_standby_setup() {
  *    • Max7219
  */
 void setup() {
+  volatile int hello = 42;
+  uint32_t baudadd = hello + 1000UL - hello;// was previously just constant 1000UL
 
   tmc_standby_setup();  // TMC Low Power Standby pins must be set early or they're not usable
 
