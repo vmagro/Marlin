@@ -2896,14 +2896,23 @@
  *
  * See https://marlinfw.org/docs/configuration/laser_spindle.html for more config details.
  */
-//#define SPINDLE_FEATURE
+#define SPINDLE_FEATURE
 //#define LASER_FEATURE
 #if EITHER(SPINDLE_FEATURE, LASER_FEATURE)
   #define SPINDLE_LASER_ACTIVE_STATE    LOW    // Set to "HIGH" if the on/off function is active HIGH
-  #define SPINDLE_LASER_PWM             true   // Set to "true" if your controller supports setting the speed/power
+  // vmagro: this is a bit confusing - the spindle I am using does not have PWM
+  // speed control, but the laser does. I am turning off PWM for now, since I
+  // haven't installed a laser and I want to make sure that the spindle is just
+  // binary on/off.
+  #define SPINDLE_LASER_PWM             false   // Set to "true" if your controller supports setting the speed/power
   #define SPINDLE_LASER_PWM_INVERT      false  // Set to "true" if the speed/power goes up when you want it to go slower
 
-  #define SPINDLE_LASER_FREQUENCY       2500   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
+  // #define SPINDLE_LASER_FREQUENCY       2500   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
+
+  // vmagro: use fan0 on skr1.4 to turn on spindle
+  #define SPINDLE_LASER_ENA_PIN         P2_03
+  // just to be safe:
+  #define FAN_PIN                       -1
 
   /**
    * Speed / Power can be set ('M3 S') and displayed in terms of:
@@ -3195,11 +3204,13 @@
  * Note that G0 feedrates should be used with care for 3D printing (if used at all).
  * High feedrates may cause ringing and harm print quality.
  */
-//#define PAREN_COMMENTS      // Support for parentheses-delimited comments
+#define PAREN_COMMENTS      // Support for parentheses-delimited comments
 //#define GCODE_MOTION_MODES  // Remember the motion mode (G0 G1 G2 G3 G5 G38.X) and apply for X Y Z E F, etc.
 
 // Enable and set a (default) feedrate for all G0 moves
-//#define G0_FEEDRATE 3000 // (mm/min)
+// vmagro: This might be wildly wrong until I calibrate steps per mm, but at
+// this speed the gantry can traverse the whole table in ~30s (3.5ft = 1066mm)
+#define G0_FEEDRATE 2000 // (mm/min)
 #ifdef G0_FEEDRATE
   //#define VARIABLE_G0_FEEDRATE // The G0 feedrate is set by F in G0 motion mode
 #endif
@@ -3209,7 +3220,8 @@
  *
  * Execute certain G-code commands immediately after power-on.
  */
-//#define STARTUP_COMMANDS "M17 Z"
+// make really sure the spindle is off
+#define STARTUP_COMMANDS "M3"
 
 /**
  * G-code Macros
