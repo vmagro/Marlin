@@ -3210,7 +3210,7 @@
 // Enable and set a (default) feedrate for all G0 moves
 // vmagro: This might be wildly wrong until I calibrate steps per mm, but at
 // this speed the gantry can traverse the whole table in ~30s (3.5ft = 1066mm)
-#define G0_FEEDRATE 2000 // (mm/min)
+#define G0_FEEDRATE 7000 // (mm/min)
 #ifdef G0_FEEDRATE
   #define VARIABLE_G0_FEEDRATE // The G0 feedrate is set by F in G0 motion mode
 #endif
