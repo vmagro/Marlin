@@ -2906,10 +2906,10 @@
   // #define SPINDLE_LASER_FREQUENCY       2500   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
 
   // vmagro: use fan0 on skr1.4 to turn on laser
-  #define SPINDLE_LASER_ENA_PIN         P2_03
-  #define SPINDLE_LASER_PWM_PIN         P1_30
-  // just to be safe:
-  #define FAN_PIN                       -1
+  #define SPINDLE_LASER_ENA_PIN         P2_03  // FAN0 - this is not actually used since the laser is only two pins
+  // #define SPINDLE_LASER_PWM_PIN         P2_03  // FAN0
+  #define SPINDLE_LASER_PWM_PIN         P2_07  // HE0
+  #define FAN_PIN 0 // to be safe
 
   /**
    * Speed / Power can be set ('M3 S') and displayed in terms of:
@@ -2966,7 +2966,7 @@
      * This allows the laser to keep in perfect sync with the planner and removes
      * the powerup/down delay since lasers require negligible time.
      */
-    #define LASER_POWER_INLINE
+    //#define LASER_POWER_INLINE
 
     #if ENABLED(LASER_POWER_INLINE)
       /**
@@ -3217,8 +3217,8 @@
  *
  * Execute certain G-code commands immediately after power-on.
  */
-// make really sure the spindle is off
-#define STARTUP_COMMANDS "M3"
+// make really sure the laser is off
+#define STARTUP_COMMANDS "M5"
 
 /**
  * G-code Macros
