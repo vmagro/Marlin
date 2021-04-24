@@ -49,7 +49,9 @@
   #define PS_ON_PIN                        PC13  // Power Supply Control
 #endif
 
-#define FAN1_PIN                           PC7
+//#define FAN1_PIN                           PC7
+#define SPINDLE_LASER_PWM_PIN              PC7  // FAN1
+#define SPINDLE_LASER_ENA_PIN              PC13  // not actually used
 
 #ifndef CONTROLLER_FAN_PIN
   #define CONTROLLER_FAN_PIN               FAN1_PIN
