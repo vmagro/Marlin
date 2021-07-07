@@ -3162,7 +3162,8 @@
   #define SPINDLE_LASER_PWM_INVERT      false  // Set to "true" if the speed/power goes up when you want it to go slower
 
   #define SPINDLE_LASER_ENA_PIN         P1_22
-  #define SPINDLE_LASER_PWM_PIN         P2_00
+  #define SPINDLE_LASER_PWM_PIN         P2_03 // fan0
+  #undef  FAN_PIN
 
   //#define SPINDLE_LASER_FREQUENCY       2500   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
 
@@ -3216,7 +3217,7 @@
      */
     #define SPEED_POWER_INTERCEPT         0    // (%) 0-100 i.e., Minimum power percentage
     #define SPEED_POWER_MIN            5000    // (RPM)
-    #define SPEED_POWER_MAX           30000    // (RPM) SuperPID router controller 0 - 30,000 RPM
+    #define SPEED_POWER_MAX            9000    // (RPM) SuperPID router controller 0 - 30,000 RPM
     #define SPEED_POWER_STARTUP       25000    // (RPM) M3/M4 speed/power default (with no arguments)
 
   #else
